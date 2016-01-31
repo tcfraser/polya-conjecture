@@ -92,19 +92,19 @@ def plot(n):
     plt.figure()
     plt.plot(k, partial_sums)
 
-    plt.title(r'Summatory Liouville $T(n) = \sum_{k=1}^{n}L(k)$')
+    plt.title(r'Summatory Liouville $T(n) = \sum_{k=1}^{n}\lambda(k)$')
     plt.xlabel(r'$n$')
     plt.ylabel(r'$T(n)$')
 
-    # plt.savefig('../figures/{n}.png'.format(n=n), dpi=800, format='png')
+    plt.savefig('../figures/{n}.png'.format(n=n), dpi=800, format='png')
     plt.savefig('../figures/{n}_low_res.png'.format(n=n), dpi=150, format='png')
-    # plt.savefig('../figures/{n}.svg'.format(n=n), format='svg')
-    # plt.savefig('../figures/{n}.pdf'.format(n=n), format='pdf')
+    plt.savefig('../figures/{n}.svg'.format(n=n), format='svg')
+    plt.savefig('../figures/{n}.pdf'.format(n=n), format='pdf')
     plt.show()
 
-# plot(100)
-# plot(10000)
-# plot(100000)
-# plot(1000000)
+plot(100)
+plot(10000)
+plot(100000)
+plot(1000000)
 
-print(factors_latex())
+# print(factors_latex())
