@@ -114,7 +114,7 @@ def plot(n):
 # plot(100)
 # plot(10000)
 # plot(100000)
-# plot(1000000)
-plot(100000000)
+# plot(1000000) # Takes a while
+# plot(100000000) # Run out of memory
 
 # print(factors_latex())
