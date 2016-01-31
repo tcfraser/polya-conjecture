@@ -2,6 +2,7 @@ import numpy as np
 import math
 import matplotlib.pyplot as plt
 from matplotlib import rc
+from itertools import groupby
 
 # Computer modern fonts
 rc('font', **{'family': 'serif', 'serif': ['Computer Modern']})
@@ -48,6 +49,42 @@ def sum_liouville(n):
 
     return(count, partial_sums)
 
+def factors_latex():
+    start = 10
+    stop = 100000
+
+    sample = np.sort(np.random.choice(np.arange(start, stop), 15))
+
+    sieve = prime_sieve(np.max(sample))
+
+    latex_code_format = "| ${k}$ | ${fact}$ | ${count}$ | ${liouville}$ |"
+    latex_code = ""
+
+    for k in sample:
+        p_fact = prime_factors(k, sieve)
+        p_fact_multi = [(p, len(list(group))) for p, group in groupby(p_fact)]
+
+        fact = ""
+        for p_mul in p_fact_multi:
+            if (len(fact) > 0):
+                fact += "\cdot"
+            p = p_mul[0]
+            mul = p_mul[1]
+
+            if (mul == 1):
+                fact += "{p}".format(p=p)
+            else:
+                fact += "{p}^{mul}".format(p=p, mul=mul)
+
+        count = len(p_fact)
+        l = liouville(count)
+        if l > 0:
+            l = "+" + str(l)
+        else:
+            l = str(l)
+        latex_code += latex_code_format.format(k=k, fact=fact, count=count, liouville=l)
+        latex_code += "\n"
+    return latex_code
 
 def plot(n):
     k = np.arange(1, n+1)
@@ -65,7 +102,9 @@ def plot(n):
     # plt.savefig('../figures/{n}.pdf'.format(n=n), format='pdf')
     plt.show()
 
-plot(100)
-plot(10000)
-plot(100000)
-plot(1000000)
+# plot(100)
+# plot(10000)
+# plot(100000)
+# plot(1000000)
+
+print(factors_latex())
