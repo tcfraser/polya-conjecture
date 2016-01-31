@@ -23,6 +23,13 @@ def prime_sieve(n):
     return primes
 
 def prime_factors(k, sieve):
+    if k < 0:
+        raise Exception("k must be non-negative")
+
+    if k == 1 or k == 0:
+        print(k)
+        return []
+
     sqrt_k = math.sqrt(k)
     for p in sieve:
         if (p > sqrt_k):
@@ -89,7 +96,9 @@ def factors_latex():
 def plot(n):
     k = np.arange(1, n+1)
     count, partial_sums = sum_liouville(n)
+
     plt.figure()
+    plt.axhline(0, color="gray", linestyle="dashed")
     plt.plot(k, partial_sums)
 
     plt.title(r'Summatory Liouville $T(n) = \sum_{k=1}^{n}\lambda(k)$')
@@ -102,9 +111,10 @@ def plot(n):
     plt.savefig('../figures/{n}.pdf'.format(n=n), format='pdf')
     plt.show()
 
-plot(100)
-plot(10000)
-plot(100000)
-plot(1000000)
+# plot(100)
+# plot(10000)
+# plot(100000)
+# plot(1000000)
+plot(100000000)
 
 # print(factors_latex())
